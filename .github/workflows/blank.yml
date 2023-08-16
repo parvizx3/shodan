@@ -1,8 +1,8 @@
-name: Update
+name: shodan
 
 on:
-  schedule:
-    - cron: '12 5 * * *'
+  #schedule:
+    #- cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,16 +11,19 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.PAT }}
     - uses: actions/setup-python@v3
       with:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-
+    - name: first loc
+      run: |
+        pip install -r req.txt
+        python shodan.py
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
     - name: push changes to remote
       run: |
-        git config --global user.name "lilcheti"
-        git config --global user.email "farbod@tokhmi.xyz"
+        git config --global user.name "parvizx3"
+        git config --global user.email "parvizx3@proton.me"
         git pull
         git add -A
         if [ -z "$(git status --porcelain)" ]; then 

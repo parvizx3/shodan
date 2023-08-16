@@ -17,9 +17,12 @@ jobs:
     - name: first
       run: |
         pip install -r req.txt
+    - name: second
+      run: |
         python shodann.py
       env:
         TOKEN: ${{ secrets.TOKEN }}
+        QUERY: ${{ secrets.QUERY }}
     - name: push changes to remote
       run: |
         git config --global user.name "parvizx3"

@@ -14,6 +14,7 @@ def get_server_addresses(results):
         server_addresses.append(result['ip_str'])
     return server_addresses
 for api_key in api_keys:
+    print(api_key)
     try:
         # Get the first 2 pages of search results
         api = shodan.Shodan(api_key)

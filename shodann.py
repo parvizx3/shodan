@@ -13,23 +13,22 @@ def get_server_addresses(results):
     for result in results['matches']:
         server_addresses.append(result['ip_str'])
     return server_addresses
-
-try:
-    # Get the first 2 pages of search results
-    for api_key in api_keys:
+for api_key in api_keys:
+    try:
+        # Get the first 2 pages of search results
         api = shodan.Shodan(api_key)
         for page in range(1, 3):
-            # Perform the search
+                # Perform the search
             results = api.search(query, page=page)
-    
-            # Get server addresses from the current page
+        
+                # Get server addresses from the current page
             server_addresses = get_server_addresses(results)
-            
-            # Print server addresses
+                
+                # Print server addresses
             print(f"Page {page} - Server Addresses:")
             for address in server_addresses:
                 print(address)
             print()
-
-except shodan.APIError as e:
-    print('Error: {}'.format(e))
+    
+    except shodan.APIError as e:
+        print('Error: {}'.format(e))
